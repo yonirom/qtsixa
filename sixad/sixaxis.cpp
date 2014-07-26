@@ -419,7 +419,12 @@ void do_rumble(int csk, int led_n, int weak, int strong, int timeout)
 
     setrumble[11] = ledpattern[led_n]; //keep old led
     send(csk, setrumble, sizeof(setrumble), 0);
+#ifdef SHANWAN_FAKE_DS3
+    usleep(50000);
+    recv(csk, buf, sizeof(buf), MSG_DONTWAIT);
+#else
     recv(csk, buf, sizeof(buf), 0); //MSG_DONTWAIT?
+#endif
 }
 
 int set_sixaxis_led(int csk, struct dev_led led, int rumble)
@@ -528,7 +533,12 @@ int set_sixaxis_led(int csk, struct dev_led led, int rumble)
     setleds[11] = ledpattern[led_n];
     if (rumble) setleds[3] = setleds[4] = setleds[5] = setleds[6] = 0x00;
     send(csk, setleds, sizeof(setleds), 0);
+#ifdef SHANWAN_FAKE_DS3
+    usleep(50000);
+    recv(csk, buf, sizeof(buf), MSG_DONTWAIT);
+#else
     recv(csk, buf, sizeof(buf), 0);
+#endif
 
     return led_n;
 }
