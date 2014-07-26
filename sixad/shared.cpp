@@ -277,5 +277,10 @@ void enable_sixaxis(int csk)
 
     /* enable reporting */
     send(csk, enable, sizeof(enable), 0);
+#ifdef SHANWAN_FAKE_DS3
+    usleep(50000);
+    recv(csk, buf, sizeof(buf), MSG_DONTWAIT);
+#else
     recv(csk, buf, sizeof(buf), 0);
+#endif
 }
