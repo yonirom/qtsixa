@@ -268,7 +268,7 @@ int get_joystick_number()
 
 void enable_sixaxis(int csk)
 {
-#ifdef GASIA_GAMEPAD_HACKS
+#ifndef GASIA_GAMEPAD_HACKS
     unsigned char enable[] = {
         0xA2,
         0x01,

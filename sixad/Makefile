@@ -6,13 +6,9 @@ LDFLAGS += -Wl,-Bsymbolic-functions
 
 GASIA_GAMEPAD_HACKS = false # Set to 'true' to enable hacks
 
-ifeq ($(GASIA_GAMEPAD_HACKS),true)
 CXXFLAGS += -DGASIA_GAMEPAD_HACKS
-endif
 
-ifdef SHANWAN_FAKE_DS3
-	CXXFLAGS += -DSHANWAN_FAKE_DS3
-endif
+CXXFLAGS += -DSHANWAN_FAKE_DS3
 
 all: sixad_bins
 

@@ -203,16 +203,14 @@ void l2cap_accept(int ctl, int csk, int isk, int debug, int legacy)
         return;
     }
 
-#if defined(GASIA_GAMEPAD_HACKS) || defined(SHANWAN_FAKE_DS3)
+    //get_sdp_device_info(&addr_src, &addr_dst, &req);
+
     req.vendor  = 0x054c;
     req.product = 0x0268;
     req.version = 0x0100;
     req.parser  = 0x0100;
 
     strcpy(req.name, "Gasia Gamepad experimental driver");
-#else
-    get_sdp_device_info(&addr_src, &addr_dst, &req);
-#endif
 
     if (!legacy && req.vendor == 0x054c && req.product == 0x0268) {
         if (debug) syslog(LOG_INFO, "Will initiate Sixaxis now");
